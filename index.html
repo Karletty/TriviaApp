@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="StyleSheet" href="style.css" />
+    <link rel="icon" type="image/icon" href="Images/favicon.ico"/>
+    <title>Vaincre toutes</title>
+</head>
+<body>
+    <header class="header">
+        <div class="center">
+            <img src="Images/logo.png" class="logo"/>
+            <h1 class="titles">Vaincre toutes</h1>
+        </div>
+        <h3 class="titles subtitle">Can you win?</h3>
+    </header>
+    <main class="screens">
+        <section class="login-screen screen center">
+            <div class="neon-container login-container">
+                <span class="interior-shadow"></span>
+                <div class="neon-content center">
+                    <img src="Images/login-image.png" class="login-image">
+                </div>
+                <div class="neon-content center">
+                    <h3 class="login-text">Let's have some fun!</h3>
+                    <input type="text" placeholder="User Name" class="user-input" minlength="4">
+                    <button class="login-btn">START</button>
+                    <p class="error"></p>
+                </div>
+        </section>
+
+        <section class="categories-screen screen center">
+            <div class="categories">
+                <button class="category geography center">
+                    <img src="Images/animation-category.png" class="category-image" />
+                    <p class="category-text">Series</p>
+                </button>
+                <button class="category history center">
+                    <img src="Images/videogames-category.png" class="category-image" />
+                    <p class="category-text">Videogames</p>
+                </button>
+            </div>
+            <div class="welcome neon-container center">
+                <span class="interior-shadow"></span>
+                <h3 class="neon-content welcome-message">Welcome <p class=" welcome-message welcome-user-name"></p> to Vaincre Toutes!</h3>
+                <p class="neon-content game-info">This is a trivia game about cartoon series and video games, you'll have a serie of questions with three possible answers and at the end of the game will see your score</p>
+            </div>
+        </section>
+
+        <section class="question-screen screen center">
+                <div class="question-container neon-container">
+                    <span class="interior-shadow"></span>
+                    <div class="content">
+                        <h3 class="neon-content question">Question</h3>
+                        <class class="timer"></class>
+                    </div>
+                </div>
+                <div class="answers-container">
+                    <button class="answers">
+                        <p class="answers-text">Answer1</p>
+                    </button>
+                    <button class="answers">
+                        <p class="answers-text">Answer2</p>
+                    </button>
+                    <button class="answers">
+                        <p class="answers-text">Answer3</p>
+                    </button>
+                </div>            
+        </section>
+
+        <section class="result-screen screen">
+            <div class="categories">
+                <button class="category geography center">
+                    <img src="Images/animation-category.png" class="category-image" />
+                    <p class="category-text">Series</p>
+                </button>
+                <button class="category history center">
+                    <img src="Images/videogames-category.png" class="category-image" />
+                    <p class="category-text">Videogames</p>
+                </button>
+            </div>
+            <div class="neon-container">
+                <span class="interior-shadow"></span>
+                <div class="neon-content">
+                    <img id="image-result"src="Images/lose.png" >
+                </div>
+                <div class="neon-content result-container center">
+                    <p class="result">RESULT Lorem, ipsum dolor.</p>
+                    <p class="phrase">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, culpa!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="name-info footer-container">
+            <p>©2021 Karletty Elías</p>
+            <p>Icons made by 
+                <a href="https://www.freepik.com" title="Freepik" class="link" target="_blank">Freepik</a>
+            </p>
+        </div>
+        <div class="footer-container">
+            <img src="Images/logo.png" class="logo footer-logo"/>
+        </div>
+        <div class="social-media-container footer-container">
+            <a href="https://www.facebook.com/karletty.elias/" target="_blank" class="social-media">
+                <img src="Images/socialMedia/facebook.png" alt="facebook" class="social-media">
+            </a>
+            <a href="https://www.instagram.com/karle_elias1310/" target="_blank" class="social-media">
+                <img src="Images/socialMedia/instagram.png" alt="instagram" class="social-media">
+            <a href="https://twitter.com/elias_karletty" target="_blank" class="social-media">
+                <img src="Images/socialMedia/twitter.png" alt="twitter" class="social-media">
+            </a>
+            </a>
+            <a href="https://github.com/Karletty" target="_blank" class="social-media">
+                <img src="Images/socialMedia/github.png" alt="github" class="social-media">
+            </a>
+        </div>
+    </footer>
+    <script src="preguntas.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

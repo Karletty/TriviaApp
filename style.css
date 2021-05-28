@@ -1,0 +1,545 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+
+:root {
+  --color-question: #dddddd;
+  --color-bg: #241b74;
+  --color-border: #1879c37c;
+  --color-shadow: #0a0821;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("Images/background.jpg");
+  background-size: 100%;
+}
+
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+
+@font-face {
+  font-family: "soopafresh";
+  src: url("Fonts/soopafre-webfont.woff2") format("woff2"),
+    url("Fonts/soopafre-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "caviar_dreams";
+  src: url("Fonts/caviardreams-webfont.woff2") format("woff2"),
+    url("Fonts/caviardreams-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "porkysregular";
+  src: url("Fonts/porkys_-webfont.woff2") format("woff2"),
+    url("Fonts/porkys_-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "madetommy";
+  src: url("Fonts/made_tommy_soft_black_personal_use-webfont.woff2")
+      format("woff2"),
+    url("Fonts/made_tommy_soft_black_personal_use-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  background-color: var(--color-bg);
+  border-bottom: 2px solid var(--color-border);
+  text-shadow: 2px 0px 3pxvar (var(--color-shadow));
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  cursor: default;
+  width: clamp(45px, 5vw, 65px);
+  height: auto;
+  margin-right: 15px;
+}
+
+.titles {
+  color: #eeeeee;
+  text-transform: uppercase;
+  font-family: "soopafresh";
+  letter-spacing: 3px;
+  font-size: clamp(25px, 4.5vw, 45px);
+  text-shadow: 0 1px 0 #aaaaaa, 0 2px 0 #a7a7a7, 0 2.5px 0 #9b9b9b,
+    0 3px 0 #a0a0a0, 0 3.5px 0 #8f8f8f, 0 4px 1px rgba(0, 0, 0, 0.1),
+    0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 2px 2.5px rgba(0, 0, 0, 0.2), 0 2.5px 3px rgba(0, 0, 0, 0.25),
+    0 3px 3.5px rgba(0, 0, 0, 0.2), 0 3.5px 5px rgba(0, 0, 0, 0.15);
+}
+
+.subtitle {
+  font-size: clamp(15px, 3vw, 30px);
+}
+
+.screens {
+  width: 100vw;
+  height: 90%;
+  align-self: center;
+}
+
+.screen {
+  width: 100vw;
+  height: 100%;
+}
+
+.login-container {
+  width: 75%;
+  height: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.login-container .neon-content {
+  flex-direction: column;
+}
+
+.login-text {
+  font-size: clamp(25px, 4vw, 45px);
+  text-shadow: 0px 0px 2px #000000;
+}
+
+.login-image {
+  width: 25vw;
+  height: auto;
+}
+
+.user-input {
+  margin: 25px 0;
+  text-align: center;
+  padding: 5px;
+  height: 45px;
+  width: 70%;
+  border-radius: 10px;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+
+.login-btn {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: var(--color-bg);
+  box-shadow: 0px 0px 8px 2px var(--color-shadow);
+  font-size: 30px;
+  height: 45px;
+  width: 50%;
+  cursor: pointer;
+  font-family: "soopafresh";
+  color: #eeeeee;
+  transition: 0.5s;
+}
+
+.login-btn:hover {
+  transform: scale(1.1);
+}
+
+.error {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #ff1f39;
+  text-shadow: 0px 0px 2px #000000;
+}
+
+.categories-screen {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.categories {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.category {
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 40%;
+  height: 60%;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0px 1px 0px var(--border-color), 0px 2px 0px var(--border-color),
+    0px 3px 0px var(--border-color), 0px 4px 0px var(--border-color),
+    0px 5px 0px var(--border-color), 0px 6px 0px var(--border-color),
+    0px 7px 0px var(--border-color), 0px 8px 0px var(--border-color),
+    0px 9px 0px var(--border-color), 0px 10px 0px var(--border-color),
+    0px 11px 10px #000;
+  transition: 0.5s;
+}
+
+.category:nth-child(1) {
+  background: linear-gradient(-45deg, #00fff7 2%, #3200a5 100%);
+  --border-color: #03b8b2;
+}
+
+.category:nth-child(2) {
+  background: linear-gradient(45deg, #f73d28 2%, #fd8739 100%);
+  --border-color: #d42a01;
+}
+
+.category:hover {
+  transform: translateY(-20px);
+}
+
+.category-image {
+  width: 75%;
+  height: auto;
+}
+
+.category-text {
+  color: var(--color-question);
+  text-shadow: 1px 1px 2px #000000;
+  font-family: "porkysregular";
+  font-size: clamp(20px, 2.5vw, 30px);
+}
+
+.welcome {
+  width: 50%;
+  height: 80%;
+  color: #ffffff;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.welcome-message {
+  font-size: clamp(25px, 4vw, 35px);
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 5px #000000;
+}
+
+.welcome-user-name {
+  display: inline;
+}
+
+.game-info {
+  text-shadow: 1px 1px 2px #000000;
+  font-size: clamp(15px, 3vw, 20px);
+}
+
+.question-screen {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.question-container {
+  height: 50%;
+  width: 80%;
+  padding: 0 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.interior-shadow {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  border-radius: 10px;
+  background: #1b063985;
+  z-index: 2;
+}
+
+.neon-content {
+  text-align: center;
+  position: relative;
+  font-family: "madetommy";
+  z-index: 10;
+}
+
+.question {
+  font-size: clamp(25px, 4vw, 35px);
+}
+
+.answers-container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  height: 40%;
+  width: 80%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.answers {
+  width: 32.7%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  background: #dcdbdbf8;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: clamp(15px, 2vw, 25px);
+  transition: 0.3s;
+}
+
+.answers:hover {
+  transform: scale(0.98);
+}
+
+.right-answer {
+  border-bottom: 5px solid#4EE266f8;
+}
+
+.wrong-answer {
+  border-bottom: 5px solid#FF1F39F8;
+}
+
+.result-screen {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  align-items: center;
+  align-self: center;
+}
+
+.result-screen .neon-container {
+  width: 50%;
+  height: 80%;
+  justify-content: space-evenly;
+  padding: 10px;
+  align-items: center;
+}
+
+#image-result {
+  width: clamp(150px, 20vw, 250px);
+}
+
+.result, .phrase {
+  color: #fff;
+  font-family: "madetommy";
+}
+
+.result-container {
+  width: 60%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.result {
+  font-size: clamp(25px, 4vw, 35px);
+}
+
+.phrase {
+  text-align: justify;
+  font-size: clamp(15px, 3vw, 20px);
+}
+
+.footer {
+  background-color: var(--color-bg);
+  border-top: 2px solid var(--color-border);
+  text-shadow: 2px 0px 3px var(--color-shadow);
+  padding: 5px 15px;
+  color: #eeeeee;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.footer-logo {
+  margin: 0;
+}
+
+.footer-container {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.name-info {
+  text-align: center;
+  flex-direction: column;
+  font-family: "madetommy";
+  font-size: clamp(15px, 1.5vw, 20px);
+}
+
+.link {
+  text-decoration: none;
+  color: #ffffff;
+  transition: 1s;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.social-media-container {
+  display: flex;
+  justify-content: center;
+}
+
+.social-media {
+  text-decoration: none;
+  color: #eeeeee;
+  width: clamp(30px, 4vw, 40px);
+  height: auto;
+  margin-right: 10px;
+  transition: 0.5s;
+}
+
+.social-media:hover {
+  transform: translateY(-3px);
+}
+
+.social-media:last-child {
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.neon-container {
+  position: relative;
+  display: flex;
+  background: #1b0638;
+  color: #fff;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.neon-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #69f7f2 9%, #e36aeb 80%);
+}
+
+.neon-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #69f7f2 9%, #e36aeb 80%);
+  filter: blur(7.5px);
+}
+
+.show-screen {
+  animation: show-screen 1s;
+  animation-timing-function: ease-in;
+}
+
+.hide-screen {
+  animation: show-screen 1s;
+  animation-timing-function: ease-in;
+  animation-direction: reverse;
+}
+
+.hide-question{
+  animation: show-question 1s;
+  animation-timing-function: ease-in;
+  animation-direction: alternate-reverse;
+}
+
+
+@keyframes show-screen {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes show-question {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+
+@media screen and (max-width: 800px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .result-screen .neon-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .result-container {
+    width: 100%;
+    height: 20%;
+  }
+
+  .categories {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .category {
+    height: 40%;
+    width: 70%;
+  }
+
+  .category-image {
+    width: 50%;
+  }
+
+  .answers-container {
+    height: 30%;
+    flex-direction: column;
+  }
+
+  .answers {
+    width: 100%;
+    height: 30%;
+  }
+}
