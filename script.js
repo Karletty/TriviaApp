@@ -9,7 +9,7 @@ const welcomeMessage = document.querySelector(".welcome-user-name");
 const categoriesBtn = document.getElementsByClassName("category");
 const result = document.querySelector(".result");
 const phrase = document.querySelector(".phrase");
-const resultImage = document.getElementById("image-result");
+const resultImage = document.querySelector(".image-result");
 
 
 let repositionedQuestions;
@@ -84,28 +84,22 @@ const transitionQuestion = element => {
 }
 
 const comprobeAnswer = position => {
-    answerIsRight = (position === rightAnswerPosition);
-    answersBtn[rightAnswerPosition].classList.add("right-answer");
+    let rightPosition = rightAnswerPosition;
+    answerIsRight = (position === rightPosition);
+    answersBtn[rightPosition].classList.add("right-answer");
     if (answerIsRight) {
-        rightAnswersCount++;
-        setTimeout(() => {
-            answersBtn[position].classList.remove("right-answer");
-            transitionQuestion(questionText);
-            for (let i = 0; i < answersText.length; i++) {
-                transitionQuestion(answersText[i]);
-            }
-        }, 750);
+        rightAnswersCount++
     } else {
         answersBtn[position].classList.add("wrong-answer");
-        setTimeout(() => {
-            answersBtn[rightAnswerPosition].classList.remove("right-answer");
-            answersBtn[position].classList.remove("wrong-answer");
-            transitionQuestion(questionText);
-            for (let i = 0; i < answersText.length; i++) {
-                transitionQuestion(answersText[i]);
-            }
-        }, 750);
     }
+    setTimeout(() => {
+        answersBtn[rightPosition].classList.remove("right-answer");
+        answersBtn[position].classList.remove("wrong-answer");
+        transitionQuestion(questionText);
+        for (let i = 0; i < answersText.length; i++) {
+            transitionQuestion(answersText[i]);
+        }
+    }, 750);
 }
 
 const changeResult = () => {

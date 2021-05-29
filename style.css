@@ -346,7 +346,7 @@ body {
   align-items: center;
 }
 
-#image-result {
+.image-result {
   width: clamp(150px, 20vw, 250px);
 }
 
