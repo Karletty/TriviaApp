@@ -73,7 +73,7 @@ const showAnswers = (answers, questionPosition, category) => {
 }
 
 const transitionQuestion = element => {
-    if(questionPositions){
+    if(questionPositions && questionPositions[1]){
         element.classList.add("hide-question");
         setTimeout(() => {
             element.classList.remove("hide-question")
