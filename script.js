@@ -20,33 +20,30 @@ let rightAnswersCount;
 let questionPositions;
 
 
-for (let i = 1; i <= 3; i++) {
-    screens[i].classList.add("hidden");
+const hideScreens = position => {
+    if (position != 3) {
+        screens[position].classList.add("hide-screen");
+        setTimeout(() => {
+            screens[position].classList.add("hidden");
+            screens[position].classList.remove("hide-screen");
+        }, 750);
+    }
+    else {
+        screens[position].classList.add("hidden");
+    }
 }
 
-
-loginBtn.addEventListener('click', function () {
-    validateUserName();
-});
-
-for (let i = 0; i < categoriesBtn.length; i++) {
-    categoriesBtn[i].addEventListener('click', function () {
-        category = categories[i];
-        showCategory(category);
-    });
+const showScreen = position => {
+    setTimeout(() => {
+        screens[position].classList.remove("hidden");
+        screens[position].classList.add("show-screen");
+        setTimeout(() => {
+            screens[position].classList.remove("show-screen");
+        }, 1000);
+    }, 1000);
 }
 
-for (let i = 0; i < answersBtn.length; i++) {
-    answersBtn[i].addEventListener('click', function () {
-        comprobeAnswer(i);
-        setTimeout(function () {
-            showQuestion(questionPositions[0], category);
-        }, 1750);
-
-    });
-}
-
-function validateUserName() {
+const validateUserName = () => {
     validUser = !userName.value || userName.value.length < 3
     if (validUser) {
         loginError.innerText = "Your user must have more than 2 characters"
@@ -58,45 +55,9 @@ function validateUserName() {
     }
 }
 
-function hideScreens(position) {
-    if (position != 3) {
-        screens[position].classList.add("hide-screen");
-        setTimeout(function () {
-            screens[position].classList.add("hidden");
-            screens[position].classList.remove("hide-screen");
-        }, 750);
-    }
-    else {
-        screens[position].classList.add("hidden");
-    }
-}
-
-function showScreen(position) {
-    setTimeout(function () {
-        screens[position].classList.remove("hidden");
-        screens[position].classList.add("show-screen");
-        setTimeout(function () {
-            screens[position].classList.remove("show-screen");
-        }, 1000);
-    }, 1000);
-}
-
-function showCategory(category) {
-    rightAnswersCount = 0
-    questionPositions = [0, 1, 2, 3];
-    hideScreens(1);
-    hideScreens(3);
-    showScreen(2);
-    let posibleQuestions = category.questions;
-    let valuesPositions = rearrange(posibleQuestions, questionPositions);
-    questionPositions = valuesPositions[1];
-    repositionedQuestions = valuesPositions[0];
-    showQuestion(questionPositions[0], category);
-}
-
-function rearrange(posibleValues, positions) {
+const rearrange = (posibleValues, positions) => {
     let reorderedValues = [];
-    positions.sort(function () { return Math.random() - 0.5 });
+    positions.sort(() => { return Math.random() - 0.5 });
     for (const j in posibleValues) {
         reorderedValues[j] = posibleValues[positions[j]];
     }
@@ -104,7 +65,62 @@ function rearrange(posibleValues, positions) {
     return valuesPositions;
 }
 
-function showQuestion(questionPosition, category) {
+const showAnswers = (answers, questionPosition, category) => {
+    for (let k = 0; k < answers.length; k++) {
+        if (answers[k] === category.answers[questionPosition][0]) {
+            rightAnswerPosition = k;
+        }
+        answersText[k].innerText = answers[k];
+    }
+}
+
+const transitionQuestion = element => {
+    if(questionPositions){
+        element.classList.add("hide-question");
+        setTimeout(() => {
+            element.classList.remove("hide-question")
+        }, 1000);
+    }
+}
+
+const comprobeAnswer = position => {
+    answerIsRight = (position === rightAnswerPosition);
+    answersBtn[rightAnswerPosition].classList.add("right-answer");
+    if (answerIsRight) {
+        rightAnswersCount++;
+        setTimeout(() => {
+            answersBtn[position].classList.remove("right-answer");
+            transitionQuestion(questionText);
+            for (let i = 0; i < answersText.length; i++) {
+                transitionQuestion(answersText[i]);
+            }
+        }, 750);
+    } else {
+        answersBtn[position].classList.add("wrong-answer");
+        setTimeout(() => {
+            answersBtn[rightAnswerPosition].classList.remove("right-answer");
+            answersBtn[position].classList.remove("wrong-answer");
+            transitionQuestion(questionText);
+            for (let i = 0; i < answersText.length; i++) {
+                transitionQuestion(answersText[i]);
+            }
+        }, 750);
+    }
+}
+
+const changeResult = () => {
+    if (rightAnswersCount > 2) {
+        result.innerText = "Congrats " + userName.value + "! you won";
+        resultImage.src = "Images/win.png";
+    }
+    else {
+        result.innerText = "Maybe next time " + userName.value + ", you lost";
+        resultImage.src = "Images/lose.png";
+    }
+    phrase.innerText = resultMessages[rightAnswersCount];
+}
+
+const showQuestion = (questionPosition, category) => {
     if (category.questions[questionPosition]) {
         questionText.innerText = category.questions[questionPosition];
         let answersPositions = [0, 1, 2];
@@ -121,57 +137,42 @@ function showQuestion(questionPosition, category) {
     }
 }
 
-function showAnswers(answers, questionPosition, category) {
-    for (let k = 0; k < answers.length; k++) {
-        if (answers[k] === category.answers[questionPosition][0]) {
-            rightAnswerPosition = k;
-        }
-        answersText[k].innerText = answers[k];
-    }
+const showCategory = category => {
+    rightAnswersCount = 0
+    questionPositions = [0, 1, 2, 3];
+    hideScreens(1);
+    hideScreens(3);
+    showScreen(2);
+    let posibleQuestions = category.questions;
+    let valuesPositions = rearrange(posibleQuestions, questionPositions);
+    questionPositions = valuesPositions[1];
+    repositionedQuestions = valuesPositions[0];
+    showQuestion(questionPositions[0], category);
 }
 
-function comprobeAnswer(position) {
-    answerIsRight = (position === rightAnswerPosition);
-    answersBtn[rightAnswerPosition].classList.add("right-answer");
-    if (answerIsRight) {
-        rightAnswersCount++;
-        setTimeout(function () {
-            answersBtn[position].classList.remove("right-answer");
-            transitionQuestion(questionText);
-            for (let i = 0; i < answersText.length; i++) {
-                transitionQuestion(answersText[i]);
-            }
-        }, 750);
-    } else {
-        answersBtn[position].classList.add("wrong-answer");
-        setTimeout(function () {
-            answersBtn[rightAnswerPosition].classList.remove("right-answer");
-            answersBtn[position].classList.remove("wrong-answer");
-            transitionQuestion(questionText);
-            for (let i = 0; i < answersText.length; i++) {
-                transitionQuestion(answersText[i]);
-            }
-        }, 750);
-    }
+
+for (let i = 1; i <= 3; i++) {
+    screens[i].classList.add("hidden");
 }
 
-function transitionQuestion(element) {
-    if(questionPositions){
-        element.classList.add("hide-question");
-        setTimeout(function () {
-            element.classList.remove("hide-question")
-        }, 1000);
-    }
+
+loginBtn.addEventListener('click',() => {
+    validateUserName();
+});
+
+for (let i = 0; i < categoriesBtn.length; i++) {
+    categoriesBtn[i].addEventListener('click', () => {
+        category = categories[i];
+        showCategory(category);
+    });
 }
 
-function changeResult() {
-    if (rightAnswersCount > 2) {
-        result.innerText = "Congrats " + userName.value + "! you won";
-        resultImage.src = "Images/win.png";
-    }
-    else {
-        result.innerText = "Maybe next time " + userName.value + ", you lost";
-        resultImage.src = "Images/lose.png";
-    }
-    phrase.innerText = resultMessages[rightAnswersCount];
+for (let i = 0; i < answersBtn.length; i++) {
+    answersBtn[i].addEventListener('click',() => {
+        comprobeAnswer(i);
+        setTimeout(() => {
+            showQuestion(questionPositions[0], category);
+        }, 1750);
+
+    });
 }

@@ -323,11 +323,11 @@ body {
 }
 
 .right-answer {
-  border-bottom: 5px solid#4EE266f8;
+  border-bottom: 13px solid#4EE266f8;
 }
 
 .wrong-answer {
-  border-bottom: 5px solid#FF1F39F8;
+  border-bottom: 13px solid#FF1F39F8;
 }
 
 .result-screen {
