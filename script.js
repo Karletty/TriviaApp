@@ -11,7 +11,7 @@ const result = document.querySelector(".result");
 const phrase = document.querySelector(".phrase");
 const resultImage = document.querySelector(".image-result");
 
-
+let screenPosition = 0;
 let repositionedQuestions;
 let category;
 let rightAnswerPosition;
@@ -20,20 +20,17 @@ let rightAnswersCount;
 let questionPositions;
 
 
-const hideScreens = position => {
-    if (position != 3) {
+const hideScreens = () => {
+    let position = screenPosition;
         screens[position].classList.add("hide-screen");
         setTimeout(() => {
             screens[position].classList.add("hidden");
             screens[position].classList.remove("hide-screen");
         }, 750);
-    }
-    else {
-        screens[position].classList.add("hidden");
-    }
 }
 
-const showScreen = position => {
+const showScreen = ()=> {
+    let position = screenPosition;
     setTimeout(() => {
         screens[position].classList.remove("hidden");
         screens[position].classList.add("show-screen");
@@ -49,8 +46,9 @@ const validateUserName = () => {
         loginError.innerText = "Your user must have more than 2 characters"
     }
     else {
-        hideScreens(0);
-        showScreen(1);
+        hideScreens();
+        screenPosition = 1;
+        showScreen();
         welcomeMessage.innerText = userName.value;
     }
 }
@@ -114,7 +112,7 @@ const changeResult = () => {
     phrase.innerText = resultMessages[rightAnswersCount];
 }
 
-const showQuestion = (questionPosition, category) => {
+const showQuestion = (questionPosition) => {
     if (category.questions[questionPosition]) {
         questionText.innerText = category.questions[questionPosition];
         let answersPositions = [0, 1, 2];
@@ -125,23 +123,24 @@ const showQuestion = (questionPosition, category) => {
         questionPositions.shift();
     }
     else {
-        hideScreens(2);
-        showScreen(3);
+        hideScreens();
+        screenPosition = 3;
+        showScreen();
         changeResult();
     }
 }
 
-const showCategory = category => {
+const showCategory = () => {
     rightAnswersCount = 0
     questionPositions = [0, 1, 2, 3];
-    hideScreens(1);
-    hideScreens(3);
-    showScreen(2);
+    hideScreens();
+    screenPosition = 2;
+    showScreen();
     let posibleQuestions = category.questions;
     let valuesPositions = rearrange(posibleQuestions, questionPositions);
     questionPositions = valuesPositions[1];
     repositionedQuestions = valuesPositions[0];
-    showQuestion(questionPositions[0], category);
+    showQuestion(questionPositions[0]);
 }
 
 
@@ -157,7 +156,7 @@ loginBtn.addEventListener('click',() => {
 for (let i = 0; i < categoriesBtn.length; i++) {
     categoriesBtn[i].addEventListener('click', () => {
         category = categories[i];
-        showCategory(category);
+        showCategory();
     });
 }
 
